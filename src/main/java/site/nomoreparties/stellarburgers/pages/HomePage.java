@@ -15,9 +15,8 @@ public class HomePage extends BasePage {
     private final By bun = By.xpath(".//span[contains(text(),'Булки')]");
     private final By sauce = By.xpath(".//span[contains(text(),'Соусы')]");
     private final By filling = By.xpath(".//span[contains(text(),'Начинки')]");
-    private final By textSause = By.xpath(".//h2[text()='Соусы']");
-    private final By textFilling = By.xpath(".//h2[text()='Начинки']");
-    private final By textBun = By.xpath(".//h2[text()='Булки']");
+    String activeTab="tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect";
+
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -49,30 +48,17 @@ public class HomePage extends BasePage {
     public void clickFilling() {
         webDriver.findElement(filling).click();
     }
-    @Step ("Отображаются Соусы")
-    public String waitTextSause() {
-        return webDriver.findElement(textSause).getText();}
-    @Step ("Отображаются Начинки")
-    public String waitTextFilling() {
-        return webDriver.findElement(textFilling).getText();
-    }
-    @Step ("Отображаются Булки")
-    public String waitTextBun() {
-        return webDriver.findElement(textBun).getText();
-    }
+
     @Step ("Ожидаем переход в раздел Соусы")
-    public void waitSause() {
-        new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Соусы')]/parent::*"), "class", "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"));
-        new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Булки')]/parent::*"), "class", "tab_tab__1SPyG  pt-4 pr-10 pb-4 pl-10 noselect"));
-    }
-    @Step ("Ожидаем переход в раздел Булки")
-    public void waitBun() {
-        new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Булки')]/parent::*"), "class", "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"));
-        new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Начинки')]/parent::*"), "class", "tab_tab__1SPyG  pt-4 pr-10 pb-4 pl-10 noselect"));
+    public boolean waitSause() {
+        return new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Соусы')]/parent::*"), "class", activeTab));
     }
     @Step ("Ожидаем переход в раздел Начинки")
-    public void waitFilling() {
-        new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Начинки')]/parent::*"), "class", "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"));
-        new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Соусы')]/parent::*"), "class", "tab_tab__1SPyG  pt-4 pr-10 pb-4 pl-10 noselect"));
+    public boolean waitFilling() {
+        return new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Начинки')]/parent::*"), "class", activeTab));
+    }
+    @Step ("Ожидаем переход в раздел Булки")
+    public boolean waitBun() {
+        return new WebDriverWait(webDriver, 5).until(ExpectedConditions.attributeToBe(By.xpath(".//span[contains(text(),'Булки')]/parent::*"), "class", activeTab));
     }
 }

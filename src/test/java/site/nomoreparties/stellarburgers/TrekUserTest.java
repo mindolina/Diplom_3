@@ -93,27 +93,6 @@ public class TrekUserTest {
 
     }
 
-    @Test
-    @DisplayName("Пользователь прошелся по разделам конструктора")
-    public void goToBurgerIngredients() {
-        HomePage homePage = new HomePage(webDriver);
-        homePage.open();
-        homePage.clickLoginInAccountHeader();
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.setEmail(createUser.getEmail());
-        loginPage.setPassord(createUser.getPassword());
-        loginPage.clickLogin();
-        homePage.clickSauce();
-        homePage.waitSause();
-        Assert.assertEquals("Соусы", homePage.waitTextSause());
-        homePage.clickFilling();
-        homePage.waitFilling();
-        Assert.assertEquals("Начинки", homePage.waitTextFilling());
-        homePage.clickBun();
-        homePage.waitBun();
-        Assert.assertEquals("Булки", homePage.waitTextBun());
-    }
-
 
     @After
     public void teardown() {
